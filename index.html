@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generador de Firmas · ANEFI</title>
+<meta name="description" content="Herramienta interna de Recursos Humanos para generar firmas corporativas ANEFI.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <span class="topbar__title">Generador de Firmas · ANEFI</span>
+</header>
+
+<main class="app">
+
+  <!-- ============ IZQUIERDA: FORMULARIO ============ -->
+  <section class="panel form-panel" aria-label="Formulario de datos">
+    <form id="signature-form" novalidate>
+
+      <div class="field">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Ej. María Fernanda Ortiz Salazar" autocomplete="name">
+      </div>
+
+      <div class="field">
+        <label for="cargo">Cargo</label>
+        <input type="text" id="cargo" name="cargo" placeholder="Ej. Analista de Inversiones" autocomplete="organization-title">
+      </div>
+
+      <div class="field">
+        <label for="area">Área <span class="field__optional">(opcional)</span></label>
+        <input type="text" id="area" name="area" placeholder="Ej. Fondos Fiduciarios" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" name="email" placeholder="nombre.apellido@anefi.com.ec" autocomplete="email">
+      </div>
+
+      <div class="field">
+        <label for="telefono">Teléfono / Extensión</label>
+        <input type="tel" id="telefono" name="telefono" placeholder="Ej. +593 2 298 1000 ext. 1042" autocomplete="tel">
+      </div>
+
+      <div class="actions" role="group" aria-label="Acciones de la firma">
+        <button type="button" class="btn btn--primary" id="btn-generate">Generar Firma</button>
+        <button type="button" class="btn btn--ghost" id="btn-reset">Restablecer</button>
+        <button type="button" class="btn btn--ghost" id="btn-download">Descargar PNG</button>
+      </div>
+
+      <p class="status-msg" id="status-msg" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <!-- ============ DERECHA: VISTA PREVIA ============ -->
+  <section class="panel preview-panel" aria-label="Vista previa de la firma">
+    <p class="preview-panel__label">Vista previa</p>
+
+    <div class="preview-surface">
+      <!-- Firma corporativa oficial ANEFI, en HTML/CSS real (sin
+           imágenes de texto). Estructura basada en tablas para
+           compatibilidad con clientes de correo (Outlook, Gmail,
+           etc.). El logo se carga desde assets/logo.png: para
+           actualizar la identidad visual basta con reemplazar
+           ese archivo. -->
+      <table id="signature" class="signature" cellpadding="0" cellspacing="0" border="0" role="presentation">
+        <tr>
+          <td class="signature__logo-cell">
+            <img id="sig-logo" class="signature__logo" src="assets/logo.png" alt="Logotipo de ANEFI — Fondos y Fideicomisos">
+          </td>
+          <td class="signature__info-cell">
+            <p class="signature__nombre" id="sig-nombre">&nbsp;</p>
+            <p class="signature__cargo" id="sig-cargo">&nbsp;</p>
+            <p class="signature__area" id="sig-area" hidden>&nbsp;</p>
+            <p class="signature__contacto" id="sig-email" hidden>&nbsp;</p>
+            <p class="signature__contacto" id="sig-telefono" hidden>&nbsp;</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<script src="assets/vendor/html-to-image.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
