@@ -139,10 +139,9 @@ button{ font-family: inherit; }
 /* ============================================================
    FIRMA — HTML/CSS real, sin imágenes de texto.
    Réplica pixel a pixel de la firma corporativa oficial ANEFI
-   (referencia: captura + logo_NEGRO.png).
+   (referencia: captura + logo_NEGRO.png), reducida de escala.
    Estructura basada en tablas para compatibilidad con clientes
-   de correo (Outlook, Gmail, etc.). Medidas extraídas 1:1 de la
-   captura oficial (escala 2x respecto al mockup de Figma).
+   de correo (Outlook, Gmail, etc.).
    ============================================================ */
 .signature{
   display: inline-block; /* se ajusta al ancho del contenido, igual que la tabla antes */
@@ -154,24 +153,24 @@ button{ font-family: inherit; }
   border-collapse: collapse;
 }
 .signature__logo-cell{
-  padding: 0 52px 0 0;
+  padding: 0 42px 0 0;
   vertical-align: middle;
 }
 .signature__logo{
-  width: 184px;
+  width: 148px;
   height: auto;
   display: block;
 }
 .signature__info-cell{
   vertical-align: middle;
-  padding-left: 20px;
+  padding-left: 16px;
   /* Ancho máximo del bloque de texto: con contenido normal (como
      el de la referencia oficial, que no supera ~190px) no tiene
      ningún efecto visible. Solo entra en juego con nombres,
      cargos o correos inusualmente largos, forzándolos a quebrar
      en varias líneas en vez de estirar la firma indefinidamente
      hacia la derecha. */
-  max-width: 320px;
+  max-width: 256px;
   /* Divisor dinámico: un borde en la celda siempre ocupa el alto
      real de la fila (definido por el contenido de esta misma
      celda), sin importar cuántas líneas haya. A diferencia de un
@@ -192,36 +191,36 @@ button{ font-family: inherit; }
   word-break: break-word;
 }
 .signature__nombre{
-  margin: 0 0 8px;
-  font-size: 22px;
+  margin: 0 0 6px;
+  font-size: 18px;
   line-height: 1.15;
   font-weight: 700;
   color: #000000;
 }
 .signature__cargo{
   margin: 0;
-  font-size: 16px;
+  font-size: 13px;
   line-height: 1.2;
   font-weight: 700;
   color: #000000;
 }
 .signature__area{
   margin: 2px 0 0;
-  font-size: 16px;
+  font-size: 13px;
   line-height: 1.2;
   font-weight: 700;
   color: #000000;
 }
 .signature__contacto{
-  margin: 6px 0 0;
-  font-size: 14px;
+  margin: 5px 0 0;
+  font-size: 11px;
   line-height: 1.2;
   font-weight: 400;
   color: #000000;
 }
 .signature__contacto + .signature__contacto{
-  margin: 4px 0 0;
-  font-size: 13px;
+  margin: 3px 0 0;
+  font-size: 10px;
 }
 .signature__contacto a{
   color: #000000;
@@ -241,8 +240,8 @@ button{ font-family: inherit; }
    ============================================================ */
 .signature__footer{
   position: relative;
-  margin-top: 6px;
-  height: 14px;
+  margin-top: 5px;
+  height: 11px;
   width: 100%;
   overflow: hidden;
   /* Degradado negro sobrio, de borde a borde. */

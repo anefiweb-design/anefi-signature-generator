@@ -44,6 +44,13 @@
         <input type="tel" id="telefono" name="telefono" placeholder="Ej. +593 2 298 1000 ext. 1042" autocomplete="tel">
       </div>
 
+      <!-- Teléfono móvil: opcional. Si queda vacío, la línea
+           correspondiente no aparece en la firma. -->
+      <div class="field">
+        <label for="movil">Teléfono móvil <span class="field__optional">(opcional)</span></label>
+        <input type="tel" id="movil" name="movil" placeholder="Ej. +593 99 123 4567" autocomplete="tel-national">
+      </div>
+
       <div class="actions" role="group" aria-label="Acciones de la firma">
         <button type="button" class="btn btn--primary" id="btn-generate">Generar Firma</button>
         <button type="button" class="btn btn--ghost" id="btn-reset">Restablecer</button>
@@ -82,6 +89,7 @@
               <p class="signature__area" id="sig-area" hidden>&nbsp;</p>
               <p class="signature__contacto" id="sig-email" hidden>&nbsp;</p>
               <p class="signature__contacto" id="sig-telefono" hidden>&nbsp;</p>
+              <p class="signature__contacto" id="sig-movil" hidden>&nbsp;</p>
             </td>
           </tr>
         </table>

@@ -36,7 +36,7 @@ const SIGNATURE_TEMPLATE = {
 // 3 = alta resolución (impresión, pantallas de muy alta densidad).
 // Cambiar solo esta constante ajusta la calidad de exportación
 // en toda la función downloadSignatureAsPNG().
-const EXPORT_SCALE = 3;
+const EXPORT_SCALE = 1;
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     area: document.getElementById("area"),
     email: document.getElementById("email"),
     telefono: document.getElementById("telefono"),
+    movil: document.getElementById("movil"),
   };
 
   /* ---------- Referencias de la firma ---------- */
@@ -60,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
     area: document.getElementById("sig-area"),
     email: document.getElementById("sig-email"),
     telefono: document.getElementById("sig-telefono"),
+    movil: document.getElementById("sig-movil"),
   };
 
   // El logo ya viene cargado desde assets/logo.png en el propio
@@ -90,6 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const area = fields.area.value.trim();
     const email = fields.email.value.trim();
     const telefono = fields.telefono.value.trim();
+    const movil = fields.movil.value.trim();
 
     sig.nombre.textContent = nombre || "\u00A0";
     sig.cargo.textContent = cargo || "\u00A0";
@@ -113,6 +116,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     setOptionalLine(sig.telefono, telefono);
+
+    // Teléfono móvil (opcional): se muestra tal cual se escribe.
+    // Si se quiere distinguirlo del fijo con un prefijo, cambiar
+    // por: setOptionalLine(sig.movil, movil ? "Cel. " + movil : "");
+    setOptionalLine(sig.movil, movil);
   }
 
   let statusTimeout;
@@ -216,6 +224,18 @@ document.addEventListener("DOMContentLoaded", () => {
     isExporting = true;
 
     try {
+      // html-to-image calcula el tamaño del lienzo a partir de las
+      // medidas del elemento ANTES de clonarlo y aplicarle "style"
+      // — así que si solo le pasamos padding en "style", el
+      // contenido se desplaza pero el lienzo se queda con el
+      // tamaño viejo (sin padding) y termina recortando lo que se
+      // sale por el borde derecho/inferior. Por eso acá se mide el
+      // elemento primero y se le pasa a "width"/"height" el tamaño
+      // ya con el margen sumado, para que el lienzo nazca del
+      // tamaño correcto desde el principio.
+      const PADDING = 16;
+      const rect = sig.root.getBoundingClientRect();
+
       const dataUrl = await htmlToImage.toPng(sig.root, {
         pixelRatio: EXPORT_SCALE,
         backgroundColor: "#ffffff",
@@ -224,6 +244,9 @@ document.addEventListener("DOMContentLoaded", () => {
         // Se salta ese paso por completo: menos trabajo y una
         // fuente menos de posibles fallos.
         skipFonts: true,
+        width: Math.ceil(rect.width) + PADDING * 2,
+        height: Math.ceil(rect.height) + PADDING * 2,
+        style: { padding: `${PADDING}px` },
       });
 
       const link = document.createElement("a");
